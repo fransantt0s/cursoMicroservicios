@@ -1,0 +1,14 @@
+Filtros Zuul: Manejan el ciclo de vida
+
+Pre: El pre-route: Se ejecuta antes de que el request sea enrutado hacia
+un microservicio, se utiliza para asignar datos,informacion,
+parametros del request(por ej los atributos ) para que sean utilizados después
+en los otros filtros, por ej: en los filtros de la ruta(Route filters).
+
+Post: Se utiliza justo después que el request haya sido enrutado, se utiliza 
+para modificar la respuesta. Tipicamente los headers(cabeceras).
+
+Route: Uno de los maás importantes.Se usa para enrutar el request.
+Acá se resuleve la ruta hacia el microservicio y aca se realiza la comunicacion,
+el request hacia el microservicio enrutado.
+

@@ -1,0 +1,4 @@
+Bulkhead: aumenta la resistencia, evitando que fallos en un servicio/instancia produzcan la caída total del sistema.
+
+Bulkhead propone separar en grupos (pools) el número de recursos que se dedican para llamar a una instancia de servicio, si el servicio llamado falla no se destinarán recursos innecesarios, evitando la falla en cascada del sistema.
+

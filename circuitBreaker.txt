@@ -1,0 +1,23 @@
+Circuit Breaker:
+
+Cerrado: Significa que está todo normal y ese servicio está por debajo del umbral de fallas
+
+Abierto: Significa que está por encima del umbral y ese servicio no responde y aca hay dos caminos o no se manda esa petición al servicio y se indica que el cortocircuito está encendido o usamos una función callback para llamar a otro servicio que reemplace el servicio que no está respondiendo. Pero este estado no es infinito y tiene un limite(tiempo de espera) por default son 60s(1 minuto)
+
+Semi-abierto: Al pasar el tiempo de espera en Abierto(1 minuto) se pasa a estado Semi-abierto que sería como un periodo de prueba, lo que va a hacer es realizar peticiones al microservicio con fallas y si la tasa de fallas permanece debajo del umbral que determinamos está todo bien y ese microservicio vuelve a estado Cerrado y si está por encima del umbral(sigue fallando) ese microservicio pasa de nuevo a Estado abierto(con fallas)
+
+Parametros:
+
+SlidingWindowSize(100) por defecto son 100 : Muestra estadisticas vamos a tener 100 solicitudes a un microservicio en particular y dentro de esas 100 solicitudes se va a registrar un porcentaje de fallas y si este porcentaje es igual o mayor al umbral configurado en los criterios entonces se abre el cortocircuito.
+
+failureRateThreshold(50) Por defecto configurado en 50: Es el porcentaje de fallas(el umbral). Por ejemplo si falla 60 veces de 100 requests: se va a pasar al estado abierto porque es más del 50% de las peticiones
+
+
+waitDurationInOpenState(60000ms): Tiempo que permanece un servicio en estado Abierto antes de pasar al estado semi-abierto
+
+permitedNumberOfCallsInHalfOpenState(10) Por defecto es 10: Es el numero de peticiones de prueba que va a realizar en el estado semi-abierto para determinar si ese servicio se arreglo o sigue fallando.
+
+slowCallRateThreshold(100) : Por defecto son 100. Lo que va a hacer esto es determinar cuando las llamadas son lentas, por ejemplo si de 100 llamadas al servicio las 100 son lentas, se entra al cortocircuito. Lo ideal es configurarlo a un porcentaje del 50%, es decir que si de 100,50 son lentas mandar a cortocircuito.
+
+slowCallDurateionThreshold (60000ms) : Este parametro lo usamos para determinar cuando una llamada al servicio va a ser lenta(en este caso si iguala o pasa los 60000ms o 1 minuto).
+

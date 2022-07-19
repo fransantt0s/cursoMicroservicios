@@ -1,0 +1,79 @@
+Microservicios: Enfoque que nos permite desarrollar apps que estan
+compuestas en servicios, es decir en vez de una gran aplicacion(monolito)
+aca tenemos varios proyectos,varios microservicios independientes pero que
+se comunican entre si mediante API REST.
+
+Esto hace que las apps sean mucho más facil de escalar y 
+también mucho más rápidas de desarrollar.
+
+Microservicios: 
+
+. Autónomos: Cada servicio de forma independiente y separada tiene su 
+propio equipo de desarrollo y a parte de desarrollar también se puede implementar,
+deplegar y escalar de forma autónoma sin afectar al resto de los servicios.
+
+. Especializados: Cada servicio tiene una función, una tarea unica dentro de esta 
+gran aplicación.
+
+. Registro autómatico(descubrimiento de servicios): Cuando se despliega o se escala
+un microservicio se registra en un servidor de nombre y guarda en ese servidor:
+su ubicación, la ip,el puerto,el nombre del dominio. Datos fundamentales para
+la comunicación con otro microservicio.
+
+. Escalado flexible: Los servicios se pueden escalar dependiendo de la demanda.
+Cuando hay mucha demanda en un servicio determinado, automaticamente tiene que 
+aumentar su disponibilidad en la nube, en los servidores, por lo tanto se tienen
+que desplegar más instancias y cada instancia va a estar en un servidor,
+en un puerto diferente y mediante Balanceo de cargas va a buscar, seleccionar
+la mejor instancia posible.
+
+. Tolerancia a fallos
+
+. Balanceo de carga: a a buscar, seleccionar la mejor instancia posible.
+Utiliza el algoritmo Round robin(se divide de forma equitativa) y tambien 
+dependiendo de la salud del microservicio(que tan disponible está para el cliente)
+por ej: que no tenga latencia, que no tenga problemas de comunicacion y si estan
+todos al mismo nivel de salud va a ser de forma equitativa.
+
+. Configuración centralizada: Podriamos tener muchos servicios desplegados y todas
+las configuraciones de cada de uno de ellos pueden estar todos dentro 
+de un servidor de configuración , (utilizando Spring cloud config)
+
+. Libertad tecnológica : En cada microservicio podemos seleccionar la tecnologia
+que más nos quede comoda para esa tarea en particular
+
+. Agilidad y equipos más pequeños: Cada servicio tiene su propio equipo
+de desarrollo. 
+
+. Ciclo de desarrollo más cortos: Los tiempos,ciclos de desarrollo son 
+mucho más cortos.
+
+. Código reutilizable: Cada microservicio se puede reutilizar en varios otros 
+servicios comunicandose mediante API REST.
+
+Por ejemplo tenemos un microservicio que está determinado con una función 
+espécifica pero también esta misma función se puede utilizar como componente base
+en otro microservicio.
+
+--------------------------------------------------------------------------------
+CICLO DE MICROSERVICIOS.
+
+El cliente se conecta al Gateway Zuul y a traves de Zuul podemos acceder a todos 
+los microservicios de nuestra aplicación (a todo el ecosistema), por supuesto
+utilizando Balanceador de carga (Ribbon) y también entre los microservicos 
+también se pueden comunicar utilizando el balanceador (Ribbon).
+
+Cada microservicio y también el Gateway Zuul se registran en el servidor
+de nombre (Eureka Server) y de forma paralela tenemos el servidor de configuración
+(Spring cloud config) que maneja y administra toda la configuración de nuestro 
+sistema(de cada microservicio), utilizando GIT como repositorio para guardar
+nuestros archivos .properties(nuestras configuraciones)
+
+
+
+
+
+
+
+
+
